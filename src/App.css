@@ -1,5 +1,19 @@
+body {
+  opacity: 1;
+  height: 100vh;
+  margin: 0;
+  background: url('assets/pattern-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  }
+
 .App {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+  width: 100%;
 }
 
 .App-logo {
