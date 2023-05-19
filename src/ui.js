@@ -19,6 +19,7 @@ import pattern from './assets/pattern.png'
 import { initColorTracking } from './colors'
 import { getNotes, getScales, sendNote } from './music'
 import WebMidi from 'webmidi'
+import { useState } from 'react'
 
 let capture
 
@@ -33,6 +34,8 @@ const UI = ({
   selectedCamera,
   midiDevices,
 }) => {
+
+  const [throttle, setThrottle] = useState(500);
 
   const setup = (p5, canvasParentRef) => {
       const canvas = p5.createCanvas(640, 480).parent(canvasParentRef)
@@ -60,12 +63,9 @@ const UI = ({
     const trackingData = window.trackingData
     if(trackingData){ //if there is tracking data to look at, then...
       for (let i = 0; i < trackingData.length; i++) { //loop through each of the detected colors
-        const {x, y } = trackingData[i]
-          sendNote(x,y)
         let c = p5.color(255, 255,255);
         p5.noFill()
         p5.stroke(c)
-        // p5.noStroke();
         p5.rect(trackingData[i].x,trackingData[i].y,trackingData[i].width,trackingData[i].height)
       }
     } else {
@@ -133,12 +133,16 @@ const UI = ({
                   </select>
                 </Control>
                 <Control>
-                  <label>Polyphoy</label>
-                  <select>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                  </select>
+                  <label>Rate</label>
+                  <input type="number"
+                         step={100}
+                         style={{width: '150px'}}
+                         min={1}
+                         value={throttle}
+                         onChange={(e) => {
+                         setThrottle(parseInt(e.target.value))
+                          window.throttle = parseInt(e.target.value)
+                  }}/>
                 </Control>
                 <MIDISelectionContainer>
                   <MIDIIcon width="40" height="40" />

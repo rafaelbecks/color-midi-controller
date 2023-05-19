@@ -1,3 +1,6 @@
+import { throttle } from './utls'
+import { sendNote } from './music'
+
 const tracking = window.tracking
 
   export function initColorTracking(value) {
@@ -43,9 +46,14 @@ const tracking = window.tracking
       tracking.track('#myVideo', colors); // start the tracking of the colors above on the camera in p5
 
       //start detecting the tracking
-      colors.on('track', function(event) {
+      colors.on('track', throttle(function(event) {
         window.trackingData = event.data
-      })
+        for (let i = 0; i < event.data.length; i++) { //loop through each of the detected colors
+          const { x, y } = event.data[i]
+          sendNote(x,y)
+        }
+
+      }, window.throttle || 500))
 
     }
  }
