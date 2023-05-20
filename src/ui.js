@@ -36,6 +36,8 @@ const UI = ({
 }) => {
 
   const [throttle, setThrottle] = useState(500);
+  const [duration, setDuration] = useState(2000);
+  const [channel, setChannel] = useState(1);
 
   const setup = (p5, canvasParentRef) => {
       const canvas = p5.createCanvas(640, 480).parent(canvasParentRef)
@@ -144,6 +146,18 @@ const UI = ({
                           window.throttle = parseInt(e.target.value)
                   }}/>
                 </Control>
+                <Control>
+                  <label>Duration</label>
+                  <input type="number"
+                         step={100}
+                         style={{width: '150px'}}
+                         min={100}
+                         value={duration}
+                         onChange={(e) => {
+                           setDuration(parseInt(e.target.value))
+                           window.duration = parseInt(e.target.value)
+                         }}/>
+                </Control>
                 <MIDISelectionContainer>
                   <MIDIIcon width="40" height="40" />
                   <Control>
@@ -159,6 +173,19 @@ const UI = ({
                         )
                       })}
                     </BigSelect>
+                  </Control>
+                  <Control style={{ marginTop: '15px'}}>
+                    <label>Channel</label>
+                    <input type="number"
+                           step={1}
+                           style={{width: '150px'}}
+                           min={1}
+                           max={16}
+                           value={channel}
+                           onChange={(e) => {
+                             setChannel(parseInt(e.target.value))
+                             window.channel = parseInt(e.target.value)
+                           }}/>
                   </Control>
                 </MIDISelectionContainer>
               </MIDISection>

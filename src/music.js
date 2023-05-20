@@ -23,6 +23,8 @@ export const sendNote = (x,y) => {
   const maxX= 620
   const maxY = 460
   const velocity = window.velocity || 0.5
+  const duration = window.duration || 2000
+  const channel = window.channel || 1
   const key = window.key || 'C'
   const scale = window.scale || 'major pentatonic'
   const octaves = window.octaves || 2
@@ -34,5 +36,7 @@ export const sendNote = (x,y) => {
   const noteToSend = `${notesFromScale[index]}${octave}`
   document.getElementById('note').innerText = noteToSend
 
-  WebMidi.outputs[0].playNote(noteToSend, 'all', { duration: 1000 ,velocity})
+  WebMidi.outputs[0].playNote(noteToSend, channel, {
+    duration,
+    velocity})
 }
