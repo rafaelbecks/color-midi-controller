@@ -38,6 +38,7 @@ const UI = ({
   const [throttle, setThrottle] = useState(500);
   const [duration, setDuration] = useState(2000);
   const [channel, setChannel] = useState(1);
+  const [scale, setScale] = useState('major pentatonic')
 
   const setup = (p5, canvasParentRef) => {
       const canvas = p5.createCanvas(640, 480).parent(canvasParentRef)
@@ -104,8 +105,9 @@ const UI = ({
                 </Control>
                 <Control>
                   <label>Scale</label>
-                  <select value={window.scale} onChange={(e) => {
+                  <select value={scale} onChange={(e) => {
                     window.scale = e.target.value
+                    setScale(e.target.value)
                   }}>
                     {scales.map((name) => {
                     return (
