@@ -17,7 +17,7 @@ import {
 import { MIDIIcon } from './icons'
 import pattern from './assets/pattern.png'
 import { initColorTracking } from './colors'
-import { getNotes, getScales, sendNote } from './music'
+import { getNotes, getScales } from './music'
 import WebMidi from 'webmidi'
 import { useState } from 'react'
 
@@ -39,6 +39,7 @@ const UI = ({
   const [duration, setDuration] = useState(2000);
   const [channel, setChannel] = useState(1);
   const [scale, setScale] = useState('major pentatonic')
+  const [octaves, setOctaves] = useState(2)
 
   const setup = (p5, canvasParentRef) => {
       const canvas = p5.createCanvas(640, 480).parent(canvasParentRef)
@@ -126,9 +127,12 @@ const UI = ({
                 {/*</Control>*/}
                 <Control>
                   <label>Octaves</label>
-                  <select value={window.octaves} onChange={(e) => {
-                    window.octaves = e.target.value
-                  }}>                    <option value={1}>1</option>
+                  <select value={octaves} onChange={(e) => {
+                    const numericOctave = parseInt(e.target.value)
+                    setOctaves(numericOctave)
+                    window.octaves = numericOctave
+                  }}>
+                    <option value={1}>1</option>
                     <option value={2}>2</option>
                     <option value={3}>3</option>
                     <option value={4}>4</option>
@@ -208,6 +212,7 @@ const UI = ({
                   <label>Camera</label>
                   <BigSelect onChange={(e) => {
                     selectCamera(e.target.value)
+                    window.stop = false
                   }}
                   value={selectedCamera}
                   >
@@ -234,10 +239,8 @@ const UI = ({
                 <FooterButton>
                   <Button onClick={() => {
                     selectCamera(0)
+                    window.stop = true
                   }}>Stop</Button>
-                  <Button onClick={() => {
-                    sendNote()
-                  }}>Debug</Button>
                 </FooterButton>
               </CameraSectionContainer>
             </RightSection>

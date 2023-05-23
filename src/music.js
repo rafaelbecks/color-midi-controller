@@ -20,6 +20,7 @@ export const initMidi = async () =>
 
 
 export const sendNote = (x,y) => {
+  if(window.stop) return
   const maxX= 620
   const maxY = 460
   const velocity = window.velocity || 0.5
