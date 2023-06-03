@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
 import './App.css';
 import UI from './ui'
-import { initMidi } from './music'
+import { initMidi } from './midiMapping'
 
 function App() {
 
-  const [color, setColor] = useState('#636cdd')
   const [cameras, setCameras] = useState([])
   const [selectedCamera, selectCamera] = useState(0)
   const [midiDevices, setMidiDevices] = useState([])
@@ -52,14 +51,11 @@ function App() {
   //   initCustomColorTracking(tracker);
   // }, [])
 
-  window.color = color
   window.selectedCamera = selectedCamera
 
   return (
     <div className="App">
       <UI
-        color={color}
-        setColor={setColor}
         cameras={cameras}
         selectCamera={selectCamera}
         selectedCamera={selectedCamera}

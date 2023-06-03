@@ -19,23 +19,25 @@ export const initMidi = async () =>
   })
 
 
-export const sendNote = (x,y) => {
+export const sendNote = (x,y, colorIndex) => {
   if(window.stop) return
   const maxX= 620
   const maxY = 460
-  const velocity = window.velocity || 0.5
-  const duration = window.duration || 2000
-  const channel = window.channel || 1
-  const key = window.key || 'C'
-  const scale = window.scale || 'major pentatonic'
-  const octaves = window.octaves || 2
+  const velocity = window.velocity[colorIndex] || 0.5
+  const duration = window.duration[colorIndex] || 2000
+  const channel = window.channel[colorIndex] || 1
+  const key = window.keys[colorIndex] || 'C'
+  const scale = window.scale[colorIndex] || 'major pentatonic'
+  const octaves = window.octaves[colorIndex] || 2
   const notesFromScale = Scale.get(`${key} ${scale}`).notes
 
   const sectionX = maxX / notesFromScale.length
   const index = Math.floor(x/sectionX)
   const octave = Math.floor(y / (maxY / octaves)) + 3
   const noteToSend = `${notesFromScale[index]}${octave}`
-  document.getElementById('note').innerText = noteToSend
+  document.getElementById('note' + colorIndex).innerText = noteToSend
+
+
 
   WebMidi.outputs[0].playNote(noteToSend, channel, {
     duration,

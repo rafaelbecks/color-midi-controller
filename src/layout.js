@@ -36,7 +36,7 @@ export const FooterButton = styled.div`
     position: relative;
     display: flex;
     justify-content: center;
-    bottom: 20px;
+    top: 10px;
 `
 
 export const Resize = styled.button.attrs({
@@ -48,11 +48,15 @@ export const Separator = styled.div.attrs({
 })``
 
 export const Container = styled.div`
-  height: 551px;
+  height: 600px;
   width: 100%;
   padding: 12px 5px;
   display: flex;
   justify-content: space-around;
+  
+  .selected { 
+    font-weight: 700; 
+  }
 `
 
 export const LeftSection = styled.div`
@@ -60,7 +64,22 @@ export const LeftSection = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  justify-content: space-between
+  justify-content: space-around;
+`
+
+export const TabContainer = styled.div`
+    background: #fff;
+    display: flex;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
+`
+
+export const Tab = styled.div`
+    padding: 7px 10px;
+    border-right: 1px solid #000;
+    font-size: 14px;
+    cursor: pointer;
 `
 
 export const RightSection = styled.div`
@@ -168,7 +187,7 @@ export const SketchContainer = styled.div`
     transform: scale(0.8);
     position: relative;
     left: -65px;
-    top: 9px;
+    top: 28px;
 `
 
 export const BackgroundCamera = styled.img`
