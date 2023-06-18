@@ -33,12 +33,12 @@ const UI = ({
   midiDevices,
 }) => {
 
-  const [keys, setKey] = useState('C', 'G')
-  const [throttle, setThrottle] = useState([500, 500])
+  const [keys, setKey] = useState('C', 'C')
+  const [throttle, setThrottle] = useState([1000, 2000])
   const [duration, setDuration] = useState([2000, 1000])
   const [channel, setChannel] = useState([1,2]);
-  const [scale, setScale] = useState(['major pentatonic', 'major pentatonic'])
-  const [octaves, setOctaves] = useState([2, 3])
+  const [scale, setScale] = useState(['melodic minor', 'melodic minor'])
+  const [octaves, setOctaves] = useState([2, 4])
   const [currentChannel, setCurrentChannel] = useState(0)
   const [velocity, setVelocity] = useState([0.4,0.5])
   const [colors, setColor] = useState(['#636cdd', '#63fcdd'])
