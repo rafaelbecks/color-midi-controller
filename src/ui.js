@@ -210,7 +210,7 @@ const UI = ({
                                           window.currentMidiDevice = device.id
                                         }}
                                 >
-                                  {device.name} {index}
+                                  {device.name} 
                                 </option>
                               )
                             })}
