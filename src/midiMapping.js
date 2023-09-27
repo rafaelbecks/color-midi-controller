@@ -37,9 +37,10 @@ export const sendNote = (x,y, colorIndex) => {
   const noteToSend = `${notesFromScale[index]}${octave}`
   document.getElementById('note' + colorIndex).innerText = noteToSend
 
+  const midiIndex = window.currentMidiIndex || 0
 
 
-  WebMidi.outputs[0].playNote(noteToSend, channel, {
+  WebMidi.outputs[midiIndex].playNote(noteToSend, channel, {
     duration,
     velocity})
 }

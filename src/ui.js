@@ -198,14 +198,19 @@ const UI = ({
                       <MIDISelectionContainer>
                         <MIDIIcon width="40" height="40" />
                         <Control>
-                          <BigSelect>
-                            {midiDevices.map((device) => {
+                          <BigSelect onChange={(e) => {
+                            console.log(e.target.value)
+                            window.currentMidiIndex = parseInt(e.target.value)
+                          }}>
+                            {midiDevices.map((device, index) => {
                               return (
                                 <option key={device.id}
-                                        value={device.id}
-                                        onChange={() => { window.currentMidiDevice = device.id}}
+                                        value={index}
+                                        onChange={() => {
+                                          window.currentMidiDevice = device.id
+                                        }}
                                 >
-                                  {device.name}
+                                  {device.name} {index}
                                 </option>
                               )
                             })}
